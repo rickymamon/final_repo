@@ -86,3 +86,18 @@ def get_client(id):
             "data": client.to_dict()
         }
     ), 200
+
+@app.route("/clients", methods=['POST'])
+@jwt_required()
+@role_required('admin')
+def add_client():
+    if not request.is_json:
+        return jsonify(
+            {
+                "success": False,
+                "error": "Content-type must be application/json"
+            }
+        ), 400
+
+    data = request.get_json()
+    required_fields = ["fullname", "job_title", "description", "department", "address"]
