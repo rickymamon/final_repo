@@ -101,3 +101,13 @@ def add_client():
 
     data = request.get_json()
     required_fields = ["fullname", "job_title", "description", "department", "address"]
+    
+    for field in required_fields:
+        if field not in data:
+            return jsonify(
+                {
+                    "success": False,
+                    "error": f"Missing field: {field}"
+                }
+            ), 400
+
