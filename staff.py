@@ -38,3 +38,15 @@ def test_view_clients(client):
     
     response = client.get('/view_clients')
     assert response.status_code == 404
+    
+def test_get_client(client):
+    
+    client.post('/add_client', 
+        json={
+            "client_name": "Alice",
+            "start_date": "2024-12-16",
+            "job_department": "Finance"
+        })
+
+    response = client.get('/get_client/Alice')
+    assert response.status_code == 404
