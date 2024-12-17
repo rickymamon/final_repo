@@ -49,3 +49,25 @@ def test_apply_nonexistent_job(client):
             "job_id": "88"
         })
     assert response.status_code == 404
+
+
+def test_view_applications(client):
+    # Add a job and apply for it
+    client.post('/add_job', 
+        json={
+            "id": "102",
+            "fullname": "Charlie",
+            "job_title": "HR spacialist",
+            "description": "human resours ",
+            "department": "HR",
+            "address": "palawan"
+        })
+
+    client.post('/apply_job', 
+        json={
+            "candidate_name": "Charlie",
+            "id": "13"
+        })
+
+    response = client.get('/view_applications/104')
+    assert response.status_code == 404
