@@ -12,3 +12,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'mamonAPIAPP'
 
 db = SQLAlchemy(app)
+
+class Client(db.Model):  
+    __tablename__ = 'client'
+    id = db.Column(db.Integer, primary_key=True)
+    fullname = db.Column(db.String(45), nullable=False)
+    job_title = db.Column(db.String(45), nullable=False)
+    description = db.Column(db.String(45), nullable=False)
+    department = db.Column(db.String(45), nullable=False)
+    address = db.Column(db.String(45), nullable=False)
+
