@@ -150,5 +150,19 @@ def update_client(id):
                 "error": "Client not found"
             }
         ), 404
+        
+    data = request.get_json()
+    updatable_fields = ["fullname", "job_title", "description", "department", "address"]
 
+    for field in updatable_fields:
+        if field in data:
+            setattr(client, field, data[field])
+
+    db.session.commit()
+    return jsonify(
+        {
+            "success": True,
+            "data": client.to_dict()
+        }
+    ), 200
 
