@@ -129,4 +129,11 @@ def add_client():
                 "error": f"Error adding client: {str(e)}"
             }
         ), 500
+    
+    return jsonify(
+        {
+            "success": True,
+            "data": new_client.to_dict()
+        }
+    ), 201
 
