@@ -40,3 +40,12 @@ def test_apply_job(client):
                 "id": "78"
             })
     assert response.status_code == 404
+
+
+def test_apply_nonexistent_job(client):
+    response = client.post('/apply_job', 
+        json={
+            "candidate_name": "jeizer",
+            "job_id": "88"
+        })
+    assert response.status_code == 404
