@@ -110,4 +110,23 @@ def add_client():
                     "error": f"Missing field: {field}"
                 }
             ), 400
+    
+    try:
+        new_client = Client(
+            fullname=data["fullname"],
+            job_title=data["job_title"],
+            description=data["description"],
+            department=data["department"],
+            address=data["address"]
+        )
+        db.session.add(new_client)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify(
+            {
+                "success": False,
+                "error": f"Error adding client: {str(e)}"
+            }
+        ), 500
 
