@@ -20,3 +20,23 @@ def test_add_job(client):
             "address": "Palawan"
         })
     assert response.status_code == 404
+    
+
+def test_apply_job(client):
+    
+    client.post('/add_job', 
+        json={
+            "id": "102",
+            "fullname": "Ricky mamon",
+            "job_title": "project manager",
+            "description": "developer",
+            "department": "IT",
+            "address": "palawan"
+        })
+
+    response = client.post('/apply_job', 
+            json={
+                "candidate_name": "robert",
+                "id": "78"
+            })
+    assert response.status_code == 404
