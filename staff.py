@@ -26,3 +26,15 @@ def test_add_client_invalid_date(client):
             "job_department": "HR"
         })
     assert response.status_code == 404
+    
+def test_view_clients(client):
+    
+    client.post('/add_client', 
+        json={
+            "client_name": "John Doe",
+            "start_date": "2024-12-15",
+            "job_department": "IT"
+        })
+    
+    response = client.get('/view_clients')
+    assert response.status_code == 404
