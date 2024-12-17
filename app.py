@@ -10,3 +10,5 @@ jwt = JWTManager(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:admin@localhost/mydb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'mamonAPIAPP'
+
+db = SQLAlchemy(app)
