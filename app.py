@@ -166,3 +166,16 @@ def update_client(id):
         }
     ), 200
 
+@app.route("/clients/<int:id>", methods=["DELETE"])
+@jwt_required()
+@role_required('admin')
+def delete_client(id):
+    client = db.session.get(Client, id)
+    if not client:
+        return jsonify(
+            {
+                "success": False,
+                "error": "Client not found"
+            }
+        ), 404
+
