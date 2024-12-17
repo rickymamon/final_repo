@@ -43,3 +43,15 @@ def login():
         return jsonify({"Access Token" : token}), 200
     else:
         return jsonify({"msg": "Invalid Password or username"}), 401
+
+def role_required(required_role):
+    def wrapper(fn):
+        @wraps(fn)
+        def decorator(*args, **kwargs):
+            verify_jwt_in_request()
+            claims = get_jwt()
+            if claims.get('role') != required_role:  # Fixed the comparison here
+                return jsonify({"success": False, "msg":"Access forbidden"}), 403
+            return fn(*args, **kwargs)
+        return decorator
+    return wrapper
