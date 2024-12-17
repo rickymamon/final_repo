@@ -179,3 +179,12 @@ def delete_client(id):
             }
         ), 404
 
+    db.session.delete(client)
+    db.session.commit()
+    return jsonify(
+        {
+            "message": "Client Deleted Successfully."
+        }
+    ), 200
+
+
