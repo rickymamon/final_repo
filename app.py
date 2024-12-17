@@ -22,3 +22,12 @@ class Client(db.Model):
     department = db.Column(db.String(45), nullable=False)
     address = db.Column(db.String(45), nullable=False)
 
+def to_dict(self):
+        return {
+            "id": self.id,
+            "fullname": self.fullname,
+            "job_title": self.job_title,
+            "description": self.description,
+            "department": self.department,
+            "address": self.address
+        }
