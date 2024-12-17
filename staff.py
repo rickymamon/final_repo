@@ -50,3 +50,7 @@ def test_get_client(client):
 
     response = client.get('/get_client/Alice')
     assert response.status_code == 404
+    
+def test_get_nonexistent_client(client):
+    response = client.get('/get_client/NonExistent')
+    assert response.status_code == 404
