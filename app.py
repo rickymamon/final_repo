@@ -55,3 +55,15 @@ def role_required(required_role):
             return fn(*args, **kwargs)
         return decorator
     return wrapper
+
+@app.route("/clients", methods=["GET"])
+@jwt_required()
+@role_required('admin')
+def get_clients():
+    clients = Client.query.all()
+    return jsonify(
+        {
+            "success": True,
+            "data": [client.to_dict() for client in clients]
+        }
+    ), 200
