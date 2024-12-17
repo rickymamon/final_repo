@@ -31,3 +31,15 @@ def to_dict(self):
             "department": self.department,
             "address": self.address
         }
+        
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()  # Fixed the issue here
+    username = data.get('username')
+    password = data.get('password')
+
+    if username == 'client' and password == 'clientpass':
+        token = create_access_token(identity='client', additional_claims={'role': 'admin'})
+        return jsonify({"Access Token" : token}), 200
+    else:
+        return jsonify({"msg": "Invalid Password or username"}), 401
