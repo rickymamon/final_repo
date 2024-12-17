@@ -136,4 +136,19 @@ def add_client():
             "data": new_client.to_dict()
         }
     ), 201
+    
+    
+@app.route("/clients/<int:id>", methods=["PUT"])
+@jwt_required()
+@role_required('admin')
+def update_client(id):
+    client = db.session.get(Client, id)
+    if not client:
+        return jsonify(
+            {
+                "success": False,
+                "error": "Client not found"
+            }
+        ), 404
+
 
