@@ -67,3 +67,22 @@ def get_clients():
             "data": [client.to_dict() for client in clients]
         }
     ), 200
+    
+@app.route("/clients/<int:id>", methods=['GET'])
+@jwt_required()
+@role_required('admin')
+def get_client(id):
+    client = db.session.get(Client, id)
+    if not client:
+        return jsonify(
+            {
+                "success": False,
+                "error": "Client not found"
+            }
+        ), 404
+    return jsonify(
+        {
+            "success": True,
+            "data": client.to_dict()
+        }
+    ), 200
